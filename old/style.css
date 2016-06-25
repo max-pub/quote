@@ -1,0 +1,13 @@
+[mark-pink-hover],[mark-pink-saved]{
+	/*border: 3px solid pink;*/
+	background: pink;
+	cursor: pointer;
+}
+
+#mark-msg{
+	position: fixed;
+	top:0;
+	right:0;
+	width: 200px;
+	background: pink;
+}
