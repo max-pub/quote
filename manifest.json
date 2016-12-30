@@ -1,40 +1,46 @@
 {
   "manifest_version": 2,
-  "name": "mark.pink",
-  "description": "mark stuff",
+  "name": "snip.yt",
+  "description": "snip stuff",
   "version": "1.1",
   "author": "www.max.pub",
   "icons": {
+    "16": "icon.16.png",
     "256": "icon.png"
   },
   "browser_action": {
     "default_icon": "icon.png",
-    "default_title": "Save Quote (Alt + Q)",
-    "default_popup": "popup.html"
+    "default_title": "Snip Text (Alt + S)"
+      // "default_popup": "popup.html"
   },
+
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
-        "default": "Alt+Q",
-        "mac": "Alt+Q",
-        "windows": "Alt+Q"
+        "default": "Alt+S",
+        "mac": "Alt+S",
+        "windows": "Alt+S"
       }
     }
   },
+
   "permissions": [
-      "activeTab",
-      "https://api.max.pub/quote/*"
-    ]
-    // "background": {
-    //   "scripts": ["background.js"],
-    //   "persistent": true
-    // }
-    // "web_accessible_resources": [
-    //   "icon.png"
-    // ]
-    // "content_scripts": [{
-    //   "matches": ["<all_urls>"],
-    //   "js": ["script.js"],
-    //   "css": ["style.css"]
-    // }],
+    "activeTab",
+    "notifications",
+    "contextMenus",
+    "https://api.max.pub/quote/*"
+  ],
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  }
+  // "web_accessible_resources": [
+  //   "icon.png"
+  // ]
+  // "content_scripts": [{
+  //   "matches": ["<all_urls>"],
+  //   "js": ["script.js"],
+  //   "css": ["style.css"]
+  // }],
 }

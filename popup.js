@@ -2,7 +2,7 @@ console.log('saving Quote in ');
 
 // console.log('saving Quote in ' + tab.url);
 chrome.tabs.executeScript({
-	file: 'getQuote.js'
+	file: 'popup.getQuote.js'
 }, function(result) {
 	var quote = result[0];
 	// console.log('result quote', result[0]);
@@ -13,26 +13,30 @@ chrome.tabs.executeScript({
 
 
 
-ajax = function(url, callback) { // simple AJAX implementation
-	var req = new XMLHttpRequest();
-	if (!req) return;
-	req.open('GET', url, true);
-	req.onreadystatechange = function() {
-		if (req.readyState == 4)
-			if (callback) callback(req.responseText);
-	};
-	req.send();
-}
-
+// ajax = function(url, callback) { // simple AJAX implementation
+// 	var req = new XMLHttpRequest();
+// 	if (!req) return;
+// 	req.open('GET', url, true);
+// 	req.onreadystatechange = function() {
+// 		if (req.readyState == 4)
+// 			if (callback) callback(req.responseText);
+// 	};
+// 	req.send();
+// }
 saveQuote = function(url, title, quote) {
 	if (!quote) return;
 	console.log('saveQuote', quote, "\n\n\n");
 	var url = url.split('?')[0].split('#')[0];
 	document.getElementById('status').innerHTML = 'saving...';
-	ajax('https://api.max.pub/quotes?add=&url=' + url + '&quote=' + quote + '&title=' + title, function(txt) {
-		console.log('save-status:', txt, '!');
-		document.getElementById('status').innerHTML = 'saving...' + txt;
-	});
+	fetch(`https://api.max.pub/quotes?do=add&url=${url}&title=${title}&snippet=${snippet}`)
+		.then((res) => res.text()).then((text) => {
+			console.log('STATUS::', text);
+			document.getElementById('status').innerHTML = 'saving...' + text;
+		});
+	// ajax('https://api.max.pub/quotes?add=&url=' + url + '&quote=' + quote + '&title=' + title, function(txt) {
+	// 	console.log('save-status:', txt, '!');
+	// 	document.getElementById('status').innerHTML = 'saving...' + txt;
+	// });
 }
 
 // saveQuote();
