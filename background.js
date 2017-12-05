@@ -38,7 +38,7 @@ saveSnippet = (item, tab) => {
 	// var url = url.split('?')[0].split('#')[0];
 	// document.getElementById('status').innerHTML = 'saving...';
 	showPageNotification(tab, ++notID, item);
-	fetch(`https://api.max.pub/snippets?do=add&url=${item.url}&title=${item.title}&snippet=${item.snippet}`)
+	fetch(`https://api.max.pub/snippets?do=add&url=${item.url}&title=${encodeURI(item.title)}&snippet=${encodeURI(item.snippet)}`)
 		.then((res) => res.text()).then((status) => {
 			console.log('save-STATUS::', status);
 			hidePageNotification(tab, notID, status);
@@ -55,7 +55,7 @@ showPageNotification = (tab, ID, item) => {
 		file: 'page-notification.js'
 	}, (result) => {
 		chrome.tabs.executeScript(tab.id, {
-			code: `showNotification(${ID}, '${snippet}');`
+			code: `showNotification(${ID}, "${encodeURI(snippet)}");`
 		});
 	});
 }

@@ -5,6 +5,7 @@ if (!document.querySelector('#send-yt-notifications')) {
 }
 
 showNotification = (ID, text) => {
+	text = decodeURI(text);
 	console.log('showNotification', ID, text);
 	var FRAME = document.querySelector('#send-yt-notifications');
 	var div = document.createElement('div');
